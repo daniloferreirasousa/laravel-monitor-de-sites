@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateSiteRequest;
 
 class SiteController extends Controller
 {
@@ -46,7 +47,7 @@ class SiteController extends Controller
         $site->update($request->validated());
 
         return redirect()
-                    ->route('site.index')
+                    ->route('sites.index')
                     ->with('message', 'Site alterado com sucesso');
     }
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\SiteController;
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::post('/sites', [SiteController::class, 'store'])->name('sites.store');
+    Route::get('/sites/create', [SiteController::class, 'create'])->name('sites.create');
     Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
 });
 

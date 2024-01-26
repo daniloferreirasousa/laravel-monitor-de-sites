@@ -11,7 +11,7 @@ class StoreUpdateSiteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,7 @@ class StoreUpdateSiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'url' => ['required', 'url', 'max:255'],
         ];
     }
 }
