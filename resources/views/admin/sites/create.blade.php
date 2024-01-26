@@ -3,7 +3,5 @@
 <x-alerts/>
 
 <form action="{{ route('sites.store') }}" method="POST">
-    @csrf
-    <input type="text" name="url" placeholder="URL">
-    <button type="submit">Enviar</button>
+    @include('admin.sites.partials.form')
 </form>

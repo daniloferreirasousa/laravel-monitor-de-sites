@@ -6,6 +6,9 @@ use App\Http\Controllers\Admin\SiteController;
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::delete('/sites/{site}', [SiteController::class, 'destroy'])->name('sites.destroy');
+    Route::put('/sites/{site}/update', [SiteController::class, 'update'])->name('sites.update');
+    Route::get('/sites/{site}/edit', [SiteController::class, 'edit'])->name('sites.edit');
     Route::post('/sites', [SiteController::class, 'store'])->name('sites.store');
     Route::get('/sites/create', [SiteController::class, 'create'])->name('sites.create');
     Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
