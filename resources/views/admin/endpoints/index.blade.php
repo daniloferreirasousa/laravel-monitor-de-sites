@@ -29,7 +29,7 @@
                                 <td class="w-4 p-4">{{ $endpoint->frequency }}</td>
                                 <td class="w-4 p-4">{{ $endpoint->next_check }}</td>
                                 <td class="w-4 p-4">
-                                    <a href="{{ route('sites.edit', $site->id) }}">Editar</a>
+                                    <a href="{{ route('endpoints.edit', [$site->id, $endpoint->id]) }}">Editar</a>
                                     <a href="{{ route('endpoints.index', $site->id) }}">Endpoints</a>
                                 </td>
                             </tr>
