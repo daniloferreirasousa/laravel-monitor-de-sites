@@ -59,8 +59,12 @@ class EndpointController extends Controller
     }
 
 
-    public function destroy()
+    public function destroy(Site $site, Endpoint $endpoint)
     {
-        return [];
+        $endpoint->delete();
+
+        return redirect()
+                    ->route('endpoints.index', $site->id)
+                    ->with('message', 'Endpoint Deletado com sucesso');
     }
 }
