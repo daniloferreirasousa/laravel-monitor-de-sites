@@ -3,6 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\{
+    Check,
+    Endpoint
+};
+use App\Observers\{
+    CheckObserver,
+    EndpointObserver
+};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Check::observe(CheckObserver::class);
+        Endpoint::observe(EndpointObserver::class);
     }
 }

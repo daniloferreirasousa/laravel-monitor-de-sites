@@ -7,6 +7,7 @@ use App\Models\Endpoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateEndpointRequest;
+use Carbon\Carbon;
 
 class EndpointController extends Controller
 {
@@ -36,7 +37,11 @@ class EndpointController extends Controller
 
     public function store(StoreUpdateEndpointRequest $request, Site $site)
     {
-        $site->endpoints()->create($request->validated());
+        $data = $request->validated();
+
+        $data['next_check'] = Carbon::now();
+
+        $site->endpoints()->create($data);
 
         return redirect()
                     ->route('endpoints.index', $site->id)

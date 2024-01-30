@@ -11,8 +11,9 @@ use App\Jobs\EndpointCheckJob;
 use App\Models\Endpoint;
 
 Route::get('job', function() {
-    $endpoint = Endpoint::latest()->first();
-    EndpointCheckJob::dispatchSync($endpoint);
+   $time = now();
+
+    echo "Time: {$time}";
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {

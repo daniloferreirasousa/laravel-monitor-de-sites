@@ -16,13 +16,15 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="p-4">Status</th>
-                                <th scope="col" class="p-4">Response</th>
+                                <th scope="col" class="p-4">Data</th>
+                                <th scope="col" class="p-4">Resposta</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($checks as $check)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="w-4 p-4">{{ $check->status_code }}</td>
+                                <td class="w-4 p-4">{{ $check->created_at }}</td>
                                 <td class="w-4 p-4">{{ $check->response_body ?? '-' }}</td>
                             </tr>
                             @empty
