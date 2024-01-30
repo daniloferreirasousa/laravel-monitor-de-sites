@@ -23,7 +23,7 @@ services:
         image: nginx:alpine
         restart: unless-stopped
         ports:
-            - "8091:80"
+            - "8085:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
@@ -31,7 +31,7 @@ services:
             - monitorsites
 
     # db mysql
-    mysql:
+    db_monitor_sites:
         image: mysql:5.7.22
         # platform: linux/x86_64
         restart: unless-stopped
