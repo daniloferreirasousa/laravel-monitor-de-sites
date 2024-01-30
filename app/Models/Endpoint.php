@@ -25,4 +25,9 @@ class Endpoint extends Model
     {
         return $this->hasMany(Check::class);
     }
+
+    protected function url(): string
+    {
+        return $this->endpoint->site->url . $this->endpoint->endpoint;
+    }
 }
