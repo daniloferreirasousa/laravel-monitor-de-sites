@@ -4,7 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SiteController;
 use App\Http\Controllers\Admin\EndpointController;
+use App\Jobs\EndpointCheckJob;
+use App\Models\Endpoint;
 
+
+Route::get('job', function() {
+    $endpoint = Endpoint::latest()->first();
+    EndpointCheckJob::dispatchSync($endpoint);
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('/sites/{site}/endpoints', EndpointController::class);
