@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\Response;
 
 class EndpointCheckJob implements ShouldQueue
 {
@@ -32,11 +33,26 @@ class EndpointCheckJob implements ShouldQueue
 
         $this->endpoint->checks()->create([
             'status_code'   => $response->status(),
-            'response_body'   => $response->successful() ? null : $response->body(),
+            'response_body'   => $this->responseBody($response),
         ]);
 
         $this->endpoint->update([
-            'next_check'    => now()->addMinutes($this->endpoint->frequency),
+            'next_check'    => $this->nextCheck(),
         ]);
+    }
+
+
+    private function nextCheck()
+    {
+        return now()->addMinutes($this->endpoint->frequency);
+    }
+
+    private function responseBody(Response $response): string|null
+    {
+        if ($response->successful()) {
+            return null;
+        }
+
+        return (string) $response->body();
     }
 }
