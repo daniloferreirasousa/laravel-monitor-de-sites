@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\SiteController;
-use App\Http\Controllers\Admin\EndpointController;
+use App\Http\Controllers\Admin\{
+    SiteController,
+    EndpointController,
+    CheckController
+};
 use App\Jobs\EndpointCheckJob;
 use App\Models\Endpoint;
-
 
 Route::get('job', function() {
     $endpoint = Endpoint::latest()->first();
@@ -14,6 +16,9 @@ Route::get('job', function() {
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+
+    Route::get('/endpoints/{endpoint}/logs', [CheckController::class, 'index'])->name('endpoints.checks');
+
     Route::resource('/sites/{site}/endpoints', EndpointController::class);
 
     Route::delete('/sites/{site}', [SiteController::class, 'destroy'])->name('sites.destroy');

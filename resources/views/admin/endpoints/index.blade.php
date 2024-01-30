@@ -30,7 +30,7 @@
                                 <td class="w-4 p-4">{{ $endpoint->next_check }}</td>
                                 <td class="w-4 p-4">
                                     <a href="{{ route('endpoints.edit', [$site->id, $endpoint->id]) }}">Editar</a>
-                                    <a href="{{ route('endpoints.index', $site->id) }}">Endpoints</a>
+                                    <a href="{{ route('endpoints.checks', $endpoint->id) }}">Logs</a>
                                 </td>
                             </tr>
                             @endforeach
