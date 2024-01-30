@@ -48,17 +48,17 @@ services:
             - monitorsites
 
     # queue
-    queue:
-        image: especializati/laravel9-app
-        restart: unless-stopped
-        command: "php artisan queue:work"
-        volumes:
-            - ./:/var/www
-        depends_on:
-            - redis
-            - monitor_app
-        networks:
-            - monitorsites
+    # queue:
+    #     image: especializati/laravel9-app
+    #     restart: unless-stopped
+    #     command: "php artisan queue:work"
+    #     volumes:
+    #         - ./:/var/www
+    #     depends_on:
+    #         - redis
+    #         - monitor_app
+    #     networks:
+    #         - monitorsites
 
     # redis
     redis:
