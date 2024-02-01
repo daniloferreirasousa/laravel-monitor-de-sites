@@ -1,71 +1,44 @@
-version: "3.7"
+version: "3"
 
 services:
     # image project
-    monitor_app:
+    app:
         build:
-            args:
-                user: ${APP_USER}
-                uid: ${APP_UID}
-            context: .
+            context: ./docker/8.1
             dockerfile: Dockerfile
         restart: unless-stopped
+        ports:
+            - '8989:80'
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         depends_on:
             - redis
         networks:
-            - monitorsites
-
-    # nginx
-    nginx:
-        image: nginx:alpine
-        restart: unless-stopped
-        ports:
-            - "8085:80"
-        volumes:
-            - ./:/var/www
-            - ./docker/nginx/:/etc/nginx/conf.d/
-        networks:
-            - monitorsites
+            - monitor_sites
 
     # db mysql
-    db_monitor_sites:
+    mysql:
         image: mysql:5.7.22
-        # platform: linux/x86_64
         restart: unless-stopped
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE:-laravel}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
-            MYSQL_PASSWORD: ${DB_PASSWORD:-userpass}
-            MYSQL_USER: ${DB_USERNAME:-username}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
-            - "3388:3306"
+            - "3389:3306"
         networks:
-            - monitorsites
-
-    # queue
-    # queue:
-    #     image: especializati/laravel9-app
-    #     restart: unless-stopped
-    #     command: "php artisan queue:work"
-    #     volumes:
-    #         - ./:/var/www
-    #     depends_on:
-    #         - redis
-    #         - monitor_app
-    #     networks:
-    #         - monitorsites
+            - monitor_sites
 
     # redis
     redis:
         image: redis:latest
         networks:
-            - monitorsites
+            - monitor_sites
 
 networks:
-    monitorsites:
+    monitor_sites:
         driver: bridge
