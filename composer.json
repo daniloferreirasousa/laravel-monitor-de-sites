@@ -18,7 +18,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/telescope": "*",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "lucascudo/laravel-pt-br-localization": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
