@@ -21,7 +21,7 @@ services:
             - monitor_sites
 
     # db mysql
-    mysql:
+    db_monitor_sites:
         image: mysql:5.7.22
         restart: unless-stopped
         environment:
