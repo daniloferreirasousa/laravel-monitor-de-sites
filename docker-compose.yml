@@ -4,6 +4,9 @@ services:
     # image project
     app:
         build:
+            args:
+                user: ${APP_USER}
+                uid: ${APP_UID}
             context: ./docker/8.1
             dockerfile: Dockerfile
         restart: unless-stopped
@@ -36,6 +39,7 @@ services:
     # redis
     redis:
         image: redis:latest
+        restart: unless-stopped
         networks:
             - monitor_sites
 
