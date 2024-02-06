@@ -27,8 +27,21 @@ class EndpointCheckCommand extends Command
      */
     public function handle()
     {
-        Endpoint::where('next_check', "<=", now())->each(function ($endpoint) {
+        $endpoints = Endpoint::where('next_check', "<=", now())->get();
+
+        if ($endpoints->isEmpty()) {
+            $this->info('No endpoints to check.');
+            return;
+        }
+
+        $endpoints->each(function ($endpoint) {
             EndpointCheckJob::dispatch($endpoint);
         });
+
+        // Endpoint::where('next_check', "<=", now())->each(function ($endpoint) {
+        //     EndpointCheckJob::dispatch($endpoint);
+        // });
+
+        $this->info('Endpoint check job dispatched sccessfully.');
     }
 }
