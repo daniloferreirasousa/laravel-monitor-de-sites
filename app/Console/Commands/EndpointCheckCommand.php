@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Endpoint;
 use App\Jobs\EndpointCheckJob;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class EndpointCheckCommand extends Command
 {

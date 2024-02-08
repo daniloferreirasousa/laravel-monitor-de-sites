@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="{{ asset('assets/icons/connectdevelop.svg') }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -33,4 +34,10 @@
             </main>
         </div>
     </body>
+    <footer class="bg-gray-800 py-4">
+        <div class="container mx-auto text-center text-gray-400 text-sm">
+            <p>&copy; 2024 - Todos os direitos reservados</p>
+            <p>By: Danilo de Andrade Ferreira Sousa</p>
+        </div>
+    </footer>
 </html>

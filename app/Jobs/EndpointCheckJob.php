@@ -4,12 +4,13 @@ namespace App\Jobs;
 
 use App\Models\Endpoint;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Http\Client\Response;
 
 class EndpointCheckJob implements ShouldQueue
 {
@@ -44,7 +45,8 @@ class EndpointCheckJob implements ShouldQueue
 
     private function nextCheck()
     {
-        return now()->addMinutes($this->endpoint->frequency);
+        $next = now()->addMinutes($this->endpoint->frequency);
+        return $next;
     }
 
     private function responseBody(Response $response): string|null

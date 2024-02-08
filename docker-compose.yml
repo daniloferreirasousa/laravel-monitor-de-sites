@@ -1,21 +1,31 @@
-version: "3"
+version: "3.7"
 
 services:
     # image project
     app:
         build:
-            context: ./docker/8.1
+            context: ./docker
             dockerfile: Dockerfile
         restart: unless-stopped
-        ports:
-            - '8989:80'
         working_dir: /var/www/
         volumes:
             - ./:/var/www
         depends_on:
             - redis
         networks:
-            - monitor-app
+            - monitorsites
+
+    # nginx
+    nginx:
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8989:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - monitorsites
 
     # db mysql
     mysql:
@@ -31,14 +41,14 @@ services:
         ports:
             - "3388:3306"
         networks:
-            - monitor-app
+            - monitorsites
 
     # redis
     redis:
         image: redis:latest
         networks:
-            - monitor-app
+            - monitorsites
 
 networks:
-    monitor-app:
+    monitorsites:
         driver: bridge

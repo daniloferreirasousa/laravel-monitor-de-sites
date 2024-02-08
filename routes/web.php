@@ -9,11 +9,15 @@ use App\Http\Controllers\Admin\{
 };
 use App\Jobs\EndpointCheckJob;
 use App\Models\Endpoint;
+use Carbon\Carbon;
 
 Route::get('job', function() {
-   $time = now();
-
-    echo "Time: {$time}";
+    $horaAtual = now();
+    $novaHora = now()->addMinutes(1);
+    return [
+        'Hora Atual' => $horaAtual,
+        'Nova Hora'  => $novaHora
+    ];
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {

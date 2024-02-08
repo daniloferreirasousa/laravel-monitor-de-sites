@@ -1,7 +1,7 @@
-FROM php:8.1.1-fpm
+FROM php:8.1-fpm
 
-# Arguments
-ARG user=monitorapp
+# set your user name
+ARG user=monitorsites
 ARG uid=1000
 
 # Install system dependencies
@@ -12,8 +12,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip \
-    supervisor
+    unzip
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -21,17 +20,16 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
-# Install Swoole
-RUN pecl install swoole
-RUN docker-php-ext-enable swoole
-
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+    chown -R $user:$user /home/$user && \
+    chmod -R 777 /var/www && \
+    chmod -R 777 /home/$user/.composer
+
 
 # Install redis
 RUN pecl install -o -f redis \
@@ -41,12 +39,15 @@ RUN pecl install -o -f redis \
 # Set working directory
 WORKDIR /var/www
 
-COPY start-container /usr/local/bin/start-container
-RUN chmod +x /usr/local/bin/start-container
+# Copy custom configurations PHP
+COPY php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
-EXPOSE 8000
+# Add entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["start-container"]
+# Entrypoint command
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+USER $user

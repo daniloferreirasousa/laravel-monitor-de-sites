@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('response_body')->nullable();
             $table->timestamps();
 
-            $table->foreign('endpoint_id')->references('id')->on('endpoints');
+            $table->foreign('endpoint_id')->references('id')->on('endpoints')->onDelete('cascade');
         });
     }
 

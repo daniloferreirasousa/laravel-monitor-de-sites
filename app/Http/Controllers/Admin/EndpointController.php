@@ -19,7 +19,7 @@ class EndpointController extends Controller
             return back();
         }
 
-        $endpoints = $site->endpoints;
+        $endpoints = $site->endpoints()->paginate(50);
 
         return view('admin.endpoints.index', compact('site', 'endpoints'));
     }
