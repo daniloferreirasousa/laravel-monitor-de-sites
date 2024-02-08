@@ -15,7 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased dark">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
@@ -33,11 +33,11 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer class="bg-gray-800 py-4">
+            <div class="container mx-auto text-center text-gray-400 text-sm">
+                <p>&copy; 2024 - Todos os direitos reservados</p>
+                <p>By: Danilo de Andrade Ferreira Sousa</p>
+            </div>
+        </footer>
     </body>
-    <footer class="bg-gray-800 py-4">
-        <div class="container mx-auto text-center text-gray-400 text-sm">
-            <p>&copy; 2024 - Todos os direitos reservados</p>
-            <p>By: Danilo de Andrade Ferreira Sousa</p>
-        </div>
-    </footer>
 </html>
