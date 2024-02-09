@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use App\Models\Check;
+use Carbon\Carbon;
 
 class EndpointDown extends Notification implements ShouldQueue
 {
@@ -34,15 +35,18 @@ class EndpointDown extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $endpoint = $this->check->endpoint;
-        $site = $endpoint->site;
+        $endpoint   = $this->check->endpoint;
+        $site       = $endpoint->site;
 
         return (new MailMessage)
                     ->error()
                     ->subject("Site com erro ({$site->url})")
+                    ->greeting("Olá, {$notifiable->name}")
                     ->line("O endpoint {$endpoint->endpoint} está com erro {$this->check->status_code}")
-                    ->action('Ver', route('endpoints.index', $site->id))
-                    ->line('Thank you for using our application!');
+                    ->line("Data e Hora do erro: {$this->check->created_at}")
+                    ->action('Visualizar Detalhes do Erro', route('endpoints.index', $site->id))
+                    ->line('Obrigador por utilizar nossa Aplicação!')
+                    ->line("Esta é uma mensagem automática do sistema, por favor, não responda!");
     }
 
     /**
