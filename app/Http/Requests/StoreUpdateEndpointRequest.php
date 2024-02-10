@@ -31,7 +31,7 @@ class StoreUpdateEndpointRequest extends FormRequest
                         ->where('site_id', $id)
                         ->ignore($this->segment(5)),
             ],
-            'frequency' => ['required'],
+            'frequency' => ['required', 'integer'],
         ];
     }
 }

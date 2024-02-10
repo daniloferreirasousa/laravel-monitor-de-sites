@@ -56,7 +56,11 @@ class EndpointController extends Controller
 
     public function update(StoreUpdateEndpointRequest $request, Site $site, Endpoint $endpoint)
     {
-        $endpoint->update($request->validated());
+        $data = $request->validated();
+
+        $data['next_check'] = now()->addMinutes($data['frequency']);
+
+        $endpoint->update($data);
 
         return redirect()
                     ->route('endpoints.index', $site->id)
