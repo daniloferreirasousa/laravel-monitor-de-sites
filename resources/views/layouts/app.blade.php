@@ -33,11 +33,6 @@
                 {{ $slot }}
             </main>
         </div>
-        <footer class="bg-gray-800 py-4">
-            <div class="container mx-auto text-center text-gray-400 text-sm">
-                <p>&copy; 2024 - Todos os direitos reservados</p>
-                <p>By: Danilo de Andrade Ferreira Sousa</p>
-            </div>
-        </footer>
+        @include('components.footer')
     </body>
 </html>
