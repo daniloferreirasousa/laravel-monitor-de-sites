@@ -1,5 +1,8 @@
 <div align="center">
-    <h1>MONITOR DE SITES</h1>
+    <img src="./public/assets/icons/connectdevelop.svg"/>
+    <h1>
+        MONITOR DE SITES
+    </h1>
 </div>
 
 <p>Este sistema realiza o monitoramento de sites, são enviadas requisições HTTP para a url do site cadastrado. A resposta é salva nos Logs dos endpoints. O envio da requisição é de acordo com a frequência que é cadastrada para o Endpoint do site, em minutos.
@@ -48,9 +51,9 @@ docker-compose up -d --build
 ```sh
 npm run build
 ```
-
-<h3>Pronto a aplicação já deve estar disponível em <a href="http://localhost:8989">http://localhost:8989</a></h3>
-
+<br>
+<h3>Pronto, a aplicação já deve estar disponível em <a href="http://localhost:8989">http://localhost:8989</a></h3>
+<br>
 
 <h2> Páginas do Sistema </h2>
 
