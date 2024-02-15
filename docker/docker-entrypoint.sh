@@ -4,10 +4,10 @@
 php-fpm &
 
 # Update dependencys for project
-composer update &
+# composer update &
 
 # Create the key for application
-php /var/www/artisan key:generate &
+# php /var/www/artisan key:generate &
 
 # Create tables in the database
 php /var/www/artisan migrate &
