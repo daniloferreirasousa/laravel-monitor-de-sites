@@ -4,10 +4,10 @@
 php-fpm &
 
 # Update dependencys for project
-# composer update &
+composer update &
 
 # Create the key for application
-# php /var/www/artisan key:generate &
+php /var/www/artisan key:generate &
 
 # Create tables in the database
 php /var/www/artisan migrate &
@@ -17,6 +17,7 @@ php /var/www/artisan queue:work --daemon &
 
 # Run scheduler
 while true; do
+    php /var/www/artisan queue:work --daemon &
     php /var/www/artisan schedule:run --verbose --no-interaction &
     sleep 60
 done
