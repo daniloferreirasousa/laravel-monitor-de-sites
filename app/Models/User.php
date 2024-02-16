@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Site::class);
     }
+
+    public function isSuperAdmin()
+    {
+        return in_array($this->email, config("acl.admins"));
+    }
 }
