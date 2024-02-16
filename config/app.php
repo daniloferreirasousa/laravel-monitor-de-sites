@@ -144,6 +144,18 @@ return [
         // 'store' => 'redis',
     ],
 
+    /**
+     * ------------------------------------------------------------------------
+     *  IP's Allowed in Maintenance
+     * ------------------------------------------------------------------------
+     *
+     * Add your IP's for allow in maintenace mode
+     */
+
+    'down'  => [
+        'allowed' => [],
+        'message' => "Estamos realizando a manutenção do Sistema! Por favor, volte em alguns instantes.",
+    ],
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
