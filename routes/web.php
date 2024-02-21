@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\Admin\{
     SiteController,
     EndpointController,
@@ -32,6 +33,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/sites', [SiteController::class, 'store'])->name('sites.store');
     Route::get('/sites/create', [SiteController::class, 'create'])->name('sites.create');
     Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
+
+    Route::get('/common-questions', [QuestionController::class, 'index'])->name('questions');
 });
 
 Route::get('/', function () {
