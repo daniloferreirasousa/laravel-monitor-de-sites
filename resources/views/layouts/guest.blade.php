@@ -20,7 +20,7 @@
             <div>
                 <a href="/" class="flex flex-col justify-center items-center">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                    <span class="fill-current text-gray-500 text-xl">{{ env('APP_NAME') }}</span>
+                    <span class="fill-current font-extrabold text-gray-900 dark:text-white text-xl">{{ env('APP_NAME') }}</span>
                 </a>
             </div>
 
