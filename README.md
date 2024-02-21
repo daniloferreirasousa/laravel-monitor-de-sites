@@ -5,7 +5,7 @@
     </h1>
 </div>
 
-<p>Versão: 1.0</p>
+<p>Versão: 1.01</p>
 
 <p>Este sistema realiza o monitoramento de sites, são enviadas requisições HTTP para a url do site cadastrado. A resposta é salva nos Logs dos endpoints. O envio da requisição é de acordo com a frequência que é cadastrada para o Endpoint do site, em minutos.
 </p>

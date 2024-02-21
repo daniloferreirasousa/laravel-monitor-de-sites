@@ -13,7 +13,7 @@ return [
     | This is the Version of your system. This Value is used for show info about the system on footer component.
     */
 
-    'version'  => '1.0',
+    'version'  => '1.01',
 
     /*
     |--------------------------------------------------------------------------
