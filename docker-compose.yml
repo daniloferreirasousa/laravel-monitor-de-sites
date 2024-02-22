@@ -6,7 +6,7 @@ services:
         build:
             context: ./docker
             dockerfile: Dockerfile
-        restart: unless-stopped
+        restart: always
         working_dir: /var/www/
         volumes:
             - ./:/var/www
@@ -18,7 +18,7 @@ services:
     # nginx
     nginx:
         image: nginx:alpine
-        restart: unless-stopped
+        restart: always
         ports:
             - "8989:80"
         volumes:
@@ -30,7 +30,7 @@ services:
     # db mysql
     mysql:
         image: mysql:5.7.22
-        restart: unless-stopped
+        restart: always
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -39,14 +39,14 @@ services:
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
         ports:
-            - "3386:3306"
+            - "3379:3306"
         networks:
             - monitorsites
 
     # redis
     redis:
         image: redis:latest
-        restart: unless-stopped
+        restart: always
         networks:
             - monitorsites
 
